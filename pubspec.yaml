@@ -1,7 +1,6 @@
 name: flutter_keyboard_aware_dialog
 description: Keyboard aware dialog
 version: 1.0.0
-author: Pegasis
 homepage: https://github.com/PegasisForever/flutter_keyboard_aware_dialog
 
 environment:
