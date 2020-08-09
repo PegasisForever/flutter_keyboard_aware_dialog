@@ -17,3 +17,9 @@ Just replace your `Dialog` with `KeyboardAwareDialog` provided by this package.
 ## Caveats
 
 1. `barrierDismissible` will have no effect, you can't dismiss dialog by clicking the outside of the dialog.
+
+## Screenshots
+
+![](https://github.com/PegasisForever/flutter_keyboard_aware_dialog/blob/master/screenshots/portrait.png?raw=true)
+![](https://github.com/PegasisForever/flutter_keyboard_aware_dialog/blob/master/screenshots/portrait_keyboard.png?raw=true)
+![](https://github.com/PegasisForever/flutter_keyboard_aware_dialog/blob/master/screenshots/landscape_keyboard.png?raw=true)
