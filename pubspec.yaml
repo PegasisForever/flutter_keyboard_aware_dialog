@@ -1,6 +1,6 @@
 name: flutter_keyboard_aware_dialog
 description: Dialog that moves up automaticly when soft keyboard shows. Contains three variants.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/PegasisForever/flutter_keyboard_aware_dialog
 
 environment:
