@@ -110,7 +110,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.shape,
     this.scrollable = false,
-  }) : assert(contentPadding != null),
+  })  : assert(contentPadding != null),
         assert(clipBehavior != null),
         super(key: key);
 
@@ -290,13 +290,11 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// to overflow. Both [title] and [content] are wrapped in a scroll view,
   /// allowing all overflowed content to be visible while still showing the
   /// button bar.
-  @Deprecated(
-      'Set scrollable to `true`. This parameter will be removed and '
-          'was introduced to migrate AlertDialog to be scrollable by '
-          'default. For more information, see '
-          'https://flutter.dev/docs/release/breaking-changes/scrollable_alert_dialog. '
-          'This feature was deprecated after v1.13.2.'
-  )
+  @Deprecated('Set scrollable to `true`. This parameter will be removed and '
+      'was introduced to migrate AlertDialog to be scrollable by '
+      'default. For more information, see '
+      'https://flutter.dev/docs/release/breaking-changes/scrollable_alert_dialog. '
+      'This feature was deprecated after v1.13.2.')
   final bool scrollable;
 
   @override
@@ -316,7 +314,8 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
         case TargetPlatform.fuchsia:
         case TargetPlatform.linux:
         case TargetPlatform.windows:
-          label = semanticLabel ?? MaterialLocalizations.of(context)?.alertDialogLabel;
+          label = semanticLabel ??
+              MaterialLocalizations.of(context)?.alertDialogLabel;
       }
     }
 
@@ -325,9 +324,12 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
     Widget actionsWidget;
     if (title != null)
       titleWidget = Padding(
-        padding: titlePadding ?? EdgeInsets.fromLTRB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
+        padding: titlePadding ??
+            EdgeInsets.fromLTRB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
         child: DefaultTextStyle(
-          style: titleTextStyle ?? dialogTheme.titleTextStyle ?? theme.textTheme.headline6,
+          style: titleTextStyle ??
+              dialogTheme.titleTextStyle ??
+              theme.textTheme.headline6,
           child: Semantics(
             child: title,
             namesRoute: true,
@@ -340,7 +342,9 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
       contentWidget = Padding(
         padding: contentPadding,
         child: DefaultTextStyle(
-          style: contentTextStyle ?? dialogTheme.contentTextStyle ?? theme.textTheme.subtitle1,
+          style: contentTextStyle ??
+              dialogTheme.contentTextStyle ??
+              theme.textTheme.subtitle1,
           child: content,
         ),
       );
@@ -366,25 +370,19 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  if (title != null)
-                    titleWidget,
-                  if (content != null)
-                    contentWidget,
+                  if (title != null) titleWidget,
+                  if (content != null) contentWidget,
                 ],
               ),
             ),
           ),
-        if (actions != null)
-          actionsWidget,
+        if (actions != null) actionsWidget,
       ];
     } else {
       columnChildren = <Widget>[
-        if (title != null)
-          titleWidget,
-        if (content != null)
-          Flexible(child: contentWidget),
-        if (actions != null)
-          actionsWidget,
+        if (title != null) titleWidget,
+        if (content != null) Flexible(child: contentWidget),
+        if (actions != null) actionsWidget,
       ];
     }
 

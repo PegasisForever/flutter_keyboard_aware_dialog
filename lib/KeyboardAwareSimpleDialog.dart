@@ -98,7 +98,7 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
     this.elevation,
     this.semanticLabel,
     this.shape,
-  }) : assert(titlePadding != null),
+  })  : assert(titlePadding != null),
         assert(contentPadding != null),
         super(key: key);
 
@@ -178,7 +178,8 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
         case TargetPlatform.fuchsia:
         case TargetPlatform.linux:
         case TargetPlatform.windows:
-          label = semanticLabel ?? MaterialLocalizations.of(context)?.dialogLabel;
+          label =
+              semanticLabel ?? MaterialLocalizations.of(context)?.dialogLabel;
       }
     }
 
