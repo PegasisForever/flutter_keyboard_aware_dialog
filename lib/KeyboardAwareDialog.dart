@@ -9,17 +9,17 @@ part of 'flutter_keyboard_aware_dialog.dart';
 /// can't dismiss dialog by clicking the outside of the dialog.
 class KeyboardAwareDialog extends StatefulWidget {
   final Widget child;
-  final Color backgroundColor;
-  final double elevation;
+  final Color? backgroundColor;
+  final double? elevation;
   final Duration insetAnimationDuration;
   final Curve insetAnimationCurve;
   final EdgeInsets insetPadding;
   final Clip clipBehavior;
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   const KeyboardAwareDialog({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.backgroundColor,
     this.elevation,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
@@ -34,18 +34,18 @@ class KeyboardAwareDialog extends StatefulWidget {
 }
 
 class _KeyboardAwareDialogState extends State<KeyboardAwareDialog> {
-  Size dialogSize;
-  Size parentSize;
+  Size? dialogSize;
+  Size? parentSize;
 
   @override
   Widget build(BuildContext context) {
     Widget w;
-    EdgeInsets padding;
+    EdgeInsets? padding;
 
     if (dialogSize != null && parentSize != null) {
       final keyboardInsert = MediaQuery.of(context).viewInsets.bottom;
-      final visibleHeight = parentSize.height - keyboardInsert;
-      final verticalPadding = (visibleHeight - dialogSize.height) / 2;
+      final visibleHeight = parentSize!.height - keyboardInsert;
+      final verticalPadding = (visibleHeight - dialogSize!.height) / 2;
       var topPadding = verticalPadding;
       if (topPadding < widget.insetPadding.top)
         topPadding = widget.insetPadding.top;

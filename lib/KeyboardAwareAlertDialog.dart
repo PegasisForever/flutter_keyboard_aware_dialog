@@ -91,7 +91,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// null, which implies a default that depends on the values of the other
   /// properties. See the documentation of [titlePadding] for details.
   const KeyboardAwareAlertDialog({
-    Key key,
+    Key? key,
     this.title,
     this.titlePadding,
     this.titleTextStyle,
@@ -110,15 +110,13 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.shape,
     this.scrollable = false,
-  })  : assert(contentPadding != null),
-        assert(clipBehavior != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// The (optional) title of the dialog is displayed in a large font at the top
   /// of the dialog.
   ///
   /// Typically a [Text] widget.
-  final Widget title;
+  final Widget? title;
 
   /// Padding around the title.
   ///
@@ -130,13 +128,13 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// provided (but see [contentPadding]). If it _is_ null, then an extra 20
   /// pixels of bottom padding is added to separate the [title] from the
   /// [actions].
-  final EdgeInsetsGeometry titlePadding;
+  final EdgeInsetsGeometry? titlePadding;
 
   /// Style for the text in the [title] of this [AlertDialog].
   ///
   /// If null, [DialogTheme.titleTextStyle] is used, if that's null, defaults to
   /// [ThemeData.textTheme.headline6].
-  final TextStyle titleTextStyle;
+  final TextStyle? titleTextStyle;
 
   /// The (optional) content of the dialog is displayed in the center of the
   /// dialog in a lighter font.
@@ -145,7 +143,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// message. As noted in the [AlertDialog] documentation, it's important
   /// to use a [SingleChildScrollView] if there's any risk that the content
   /// will not fit.
-  final Widget content;
+  final Widget? content;
 
   /// Padding around the content.
   ///
@@ -159,7 +157,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   ///
   /// If null, [DialogTheme.contentTextStyle] is used, if that's null, defaults
   /// to [ThemeData.textTheme.subtitle1].
-  final TextStyle contentTextStyle;
+  final TextStyle? contentTextStyle;
 
   /// The (optional) set of actions that are displayed at the bottom of the
   /// dialog.
@@ -172,7 +170,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// If the [title] is not null but the [content] _is_ null, then an extra 20
   /// pixels of padding is added above the [ButtonBar] to separate the [title]
   /// from the [actions].
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   /// Padding around the set of [actions] at the bottom of the dialog.
   ///
@@ -222,7 +220,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// See also:
   ///
   /// * [ButtonBar], which [actions] configures to lay itself out.
-  final VerticalDirection actionsOverflowDirection;
+  final VerticalDirection? actionsOverflowDirection;
 
   /// The spacing between [actions] when the button bar overflows.
   ///
@@ -238,7 +236,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   ///
   /// If null then no spacing will be added in between buttons in
   /// an overflow state.
-  final double actionsOverflowButtonSpacing;
+  final double? actionsOverflowButtonSpacing;
 
   /// The padding that surrounds each button in [actions].
   ///
@@ -252,14 +250,14 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   /// See also:
   ///
   /// * [ButtonBar], which [actions] configures to lay itself out.
-  final EdgeInsetsGeometry buttonPadding;
+  final EdgeInsetsGeometry? buttonPadding;
 
   /// {@macro flutter.material.dialog.backgroundColor}
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// {@macro flutter.material.dialog.elevation}
   /// {@macro flutter.material.material.elevation}
-  final double elevation;
+  final double? elevation;
 
   /// The semantic label of the dialog used by accessibility frameworks to
   /// announce screen transitions when the dialog is opened and closed.
@@ -272,7 +270,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   ///
   ///  * [SemanticsConfiguration.isRouteName], for a description of how this
   ///    value is used.
-  final String semanticLabel;
+  final String? semanticLabel;
 
   /// {@macro flutter.material.dialog.insetPadding}
   final EdgeInsets insetPadding;
@@ -281,7 +279,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
   final Clip clipBehavior;
 
   /// {@macro flutter.material.dialog.shape}
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   /// Determines whether the [title] and [content] widgets are wrapped in a
   /// scrollable.
@@ -303,7 +301,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final DialogTheme dialogTheme = DialogTheme.of(context);
 
-    String label = semanticLabel;
+    String? label = semanticLabel;
     if (title == null) {
       switch (theme.platform) {
         case TargetPlatform.iOS:
@@ -315,13 +313,13 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
         case TargetPlatform.linux:
         case TargetPlatform.windows:
           label = semanticLabel ??
-              MaterialLocalizations.of(context)?.alertDialogLabel;
+              MaterialLocalizations.of(context).alertDialogLabel;
       }
     }
 
-    Widget titleWidget;
-    Widget contentWidget;
-    Widget actionsWidget;
+    Widget? titleWidget;
+    late Widget contentWidget;
+    Widget? actionsWidget;
     if (title != null)
       titleWidget = Padding(
         padding: titlePadding ??
@@ -329,7 +327,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
         child: DefaultTextStyle(
           style: titleTextStyle ??
               dialogTheme.titleTextStyle ??
-              theme.textTheme.headline6,
+              theme.textTheme.headline6!,
           child: Semantics(
             child: title,
             namesRoute: true,
@@ -344,8 +342,8 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
         child: DefaultTextStyle(
           style: contentTextStyle ??
               dialogTheme.contentTextStyle ??
-              theme.textTheme.subtitle1,
-          child: content,
+              theme.textTheme.subtitle1!,
+          child: content!,
         ),
       );
 
@@ -356,13 +354,13 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
           buttonPadding: buttonPadding,
           overflowDirection: actionsOverflowDirection,
           overflowButtonSpacing: actionsOverflowButtonSpacing,
-          children: actions,
+          children: actions!,
         ),
       );
 
-    List<Widget> columnChildren;
+    List<Widget?> columnChildren;
     if (scrollable) {
-      columnChildren = <Widget>[
+      columnChildren = <Widget?>[
         if (title != null || content != null)
           Flexible(
             child: SingleChildScrollView(
@@ -370,7 +368,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  if (title != null) titleWidget,
+                  if (title != null) titleWidget!,
                   if (content != null) contentWidget,
                 ],
               ),
@@ -379,7 +377,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
         if (actions != null) actionsWidget,
       ];
     } else {
-      columnChildren = <Widget>[
+      columnChildren = <Widget?>[
         if (title != null) titleWidget,
         if (content != null) Flexible(child: contentWidget),
         if (actions != null) actionsWidget,
@@ -390,7 +388,7 @@ class KeyboardAwareAlertDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: columnChildren,
+        children: columnChildren as List<Widget>,
       ),
     );
 
