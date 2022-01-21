@@ -89,7 +89,7 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
   ///
   /// The [titlePadding] and [contentPadding] arguments must not be null.
   const KeyboardAwareSimpleDialog({
-    Key key,
+    Key? key,
     this.title,
     this.titlePadding = const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 0.0),
     this.children,
@@ -98,15 +98,13 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
     this.elevation,
     this.semanticLabel,
     this.shape,
-  })  : assert(titlePadding != null),
-        assert(contentPadding != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// The (optional) title of the dialog is displayed in a large font at the top
   /// of the dialog.
   ///
   /// Typically a [Text] widget.
-  final Widget title;
+  final Widget? title;
 
   /// Padding around the title.
   ///
@@ -123,7 +121,7 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
   /// [SingleChildScrollView] underneath the title.
   ///
   /// Typically a list of [SimpleDialogOption]s.
-  final List<Widget> children;
+  final List<Widget>? children;
 
   /// Padding around the content.
   ///
@@ -140,11 +138,11 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
   final EdgeInsetsGeometry contentPadding;
 
   /// {@macro flutter.material.dialog.backgroundColor}
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// {@macro flutter.material.dialog.elevation}
   /// {@macro flutter.material.material.elevation}
-  final double elevation;
+  final double? elevation;
 
   /// The semantic label of the dialog used by accessibility frameworks to
   /// announce screen transitions when the dialog is opened and closed.
@@ -157,17 +155,17 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
   ///
   ///  * [SemanticsConfiguration.isRouteName], for a description of how this
   ///    value is used.
-  final String semanticLabel;
+  final String? semanticLabel;
 
   /// {@macro flutter.material.dialog.shape}
-  final ShapeBorder shape;
+  final ShapeBorder? shape;
 
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterialLocalizations(context));
     final ThemeData theme = Theme.of(context);
 
-    String label = semanticLabel;
+    String? label = semanticLabel;
     if (title == null) {
       switch (theme.platform) {
         case TargetPlatform.macOS:
@@ -179,7 +177,7 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
         case TargetPlatform.linux:
         case TargetPlatform.windows:
           label =
-              semanticLabel ?? MaterialLocalizations.of(context)?.dialogLabel;
+              semanticLabel ?? MaterialLocalizations.of(context).dialogLabel;
       }
     }
 
@@ -195,7 +193,7 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
               Padding(
                 padding: titlePadding,
                 child: DefaultTextStyle(
-                  style: theme.textTheme.headline6,
+                  style: theme.textTheme.headline6!,
                   child: Semantics(namesRoute: true, child: title),
                 ),
               ),
@@ -203,7 +201,7 @@ class KeyboardAwareSimpleDialog extends StatelessWidget {
               Flexible(
                 child: SingleChildScrollView(
                   padding: contentPadding,
-                  child: ListBody(children: children),
+                  child: ListBody(children: children!),
                 ),
               ),
           ],
